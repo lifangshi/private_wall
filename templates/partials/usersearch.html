@@ -1,0 +1,12 @@
+<style>
+.user{
+    margin-left: 200px;
+}
+</style>
+{% for user in users %}
+<p class="user">{{user['username']}}</p>
+{% endfor %}
+
+{% if found == False %}
+<p class="success">No result</p>
+{% endif %}

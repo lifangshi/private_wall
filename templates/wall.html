@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Success</title>
+    <style>
+        img{
+            width: 20px;
+            height: 20px;
+        }
+    </style>
+</head>
+<body>
+    {% with flashed_messages = get_flashed_messages() %}         
+    {% if flashed_messages %}                                 
+        {% for flashed_message in flashed_messages %}
+            <p>{{ flashed_message }}</p>
+        {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+    Coding dojo wall | Welcome, you've been logged in, {{session['first_name']}}!  <a href = "/logout">logout</a>
+    <br>
+    <hr>
+    <table>
+        <tr>
+            <td>
+                <u>{{ messages_count }} messages for you</u><br>
+                <table>
+                    {% for message in messages %}
+                    <tr>
+                        <td>
+                            {{ message['sender']}} said {{message['created_at']}}<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"{{ message['message']}}"
+                        </td>
+                        <td>
+                            <a href="/remove_message/{{message['id']}}"><img src="https://png.pngtree.com/svg/20161125/ba4c2ce69e.png"></a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </td>
+            <td>
+                <u>Send messages</u><br>
+                You have sent {{messages_sent_count}} so far.<br>
+                {% for first_name in users_first_name%}
+                    <form action="/send_message/{{session['first_name']}}/{{first_name['first_name']}}" method="POST">
+                        {{first_name['first_name']}}<input type="text" name="private_message"><input type="submit" value="Send">
+                    </form>
+                {% endfor %}
+                <br>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

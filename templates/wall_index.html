@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <script src="{{ url_for('static', filename='wall.js')}}"></script>
+
+    <title>Login</title>
+    <script>
+        
+    </script>
+</head>
+<body>
+    <table>
+        <tr>
+            <td>
+                <form action="/registration" method="post" id="regForm"> 
+                    Login and Registration
+                    {% with messages = get_flashed_messages() %}         
+                    {% if messages %}                                 
+                        {% for message in messages %}
+                            <p>{{ message }}</p>
+                        {% endfor %}
+                    {% endif %}
+                    {% endwith %}
+                    <br>
+                    Register here!
+                    <br>
+                    <!-- add AJAX to check if username is already taken! -->
+                    <div id = "usernameMsg"></div>
+                    Username: <input type="text" name = "username" id="username">
+                    <br>
+                    First Name: <input type="text" name = "first_name">
+                    <br>
+                    Last Name: <input type="text" name = "last_name">
+                    <br>
+                    Email: <input type="text" name = "email">
+                    <br>
+                    Password: <input type="text" name = "password">
+                    <br>
+                    Confirm password: <input type="text" name = "confirm_password">
+                    <br>
+                    <input type="submit" value="Registration">
+                </form>
+
+            </td>
+            <td>
+                <form action="/login" method="post">
+                    Login here!
+                    <br>
+                    Email: <input type="text" name = "email">
+                    <br>
+                    Password: <input type ="text" name = "password">
+                    <br>
+                    <input type="submit" value="Login">
+                </form>
+            </td>
+        </tr>
+    </table>
+
+    <!-- add AJAX to find username of the friends! -->
+    <form action="/usersearch" method="get" id = "search"> 
+        Find your friends by username
+        <br>
+        <input type="text" id="usersearch" name="username" >
+        <!-- <button type="submit">Search</button> -->
+        <div id="usersearchMsg"></div>
+    </form>
+</body>
+</html>
